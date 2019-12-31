@@ -1,0 +1,164 @@
+<main [ngClass]="{ 'py-0 px-0 my-0 mx-0': specialPage }" class="mx-lg-5">
+  <div class="mt-5">
+    <!-- Heading -->
+    <mdb-card class="mb-4 wow fadeIn">
+      <!--Card content-->
+      <mdb-card-body class="d-sm-flex justify-content-between">
+        <h4 class="mb-sm-0 pt-3">
+          <!-- <span><mat-icon style="font-size: 35px;">dashboard</mat-icon></span> &nbsp; -->
+          <img
+            src="../assets/Entergy_logo.png"
+            width="150px"
+            className="img-fluid"
+            alt="icon"
+          />
+          &nbsp;
+          <span class="logo">Meter Control Panel</span>
+        </h4>
+
+        <form class="d-flex md-form justify-content-center my-0 min-width">
+          <!-- Default input -->
+          <input
+            type="search"
+            placeholder="Type the region name to search"
+            #searchRegiontemp
+            name="searchRegion"
+            [(ngModel)]="searchRegion"
+            aria-label="Search"
+            class="form-control"
+            mdbInput
+          />
+          <button
+            mdbBtn
+            color="primary"
+            size="sm"
+            class="my-0 p"
+            type="submit"
+            (click)="SearchRegion()"
+          >
+            <mdb-icon fas icon="search"></mdb-icon>
+          </button>
+        </form>
+      </mdb-card-body>
+    </mdb-card>
+    <!-- Heading -->
+    <app-stats-card
+      (messageToEmit)="getMessage($event)"
+      (isApprovedEmit)="getIsApproved($event)"
+    ></app-stats-card>
+    <!--Grid row-->
+    <div class="row wow fadeIn">
+      <!--Grid column-->
+      <div class="col-md-12 mb-12">
+        <div>
+          <div class="row">
+            <div class="col-md-12 mx-auto">
+              <div class="md-form">
+                <input
+                  type="text"
+                  [(ngModel)]="searchText"
+                  class="form-control"
+                  id="search"
+                  mdbInput
+                />
+                <label for="search">Search</label>
+              </div>
+            </div>
+          </div>
+          <table
+            mdbTable
+            #tableEl="mdbTable"
+            id="tableSortExample"
+            class="z-depth-1"
+          >
+            <thead>
+              <tr>
+                <th
+                  [ngClass]="{ 'th-lg': i !== 0 }"
+                  *ngFor="let head of headElements; let i = index"
+                  aria-controls="tableSortExample" 
+                  scope="col" 
+                  [mdbTableSort]="elements" 
+                  [sortBy]="headElements[i]"
+                >
+                  {{ head | titlecase }}
+                  <mdb-icon fas icon="sort"></mdb-icon>
+                </th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let el of elements; let i = index">
+                <th
+                  *ngIf="
+                    i + 1 >= mdbTablePagination.firstItemIndex &&
+                    i < mdbTablePagination.lastItemIndex
+                  "
+                  scope="row"
+                >
+                  {{ el.id }}
+                </th>
+                <td
+                  *ngIf="
+                    i + 1 >= mdbTablePagination.firstItemIndex &&
+                    i < mdbTablePagination.lastItemIndex
+                  "
+                >
+                  {{ el.location }}
+                </td>
+                <td
+                  *ngIf="
+                    i + 1 >= mdbTablePagination.firstItemIndex &&
+                    i < mdbTablePagination.lastItemIndex
+                  "
+                >
+                  {{ el.meter }}
+                </td>
+                <td
+                  *ngIf="
+                    i + 1 >= mdbTablePagination.firstItemIndex &&
+                    i < mdbTablePagination.lastItemIndex
+                  "
+                >
+                  <mdb-icon fas icon="medkit" *ngIf="el.health === 'Good'" class="mr-2 green_color" aria-hidden="true"></mdb-icon>
+                  <mdb-icon fas icon="medkit" *ngIf="el.health !== 'Good'" class="mr-2 red_color" aria-hidden="true"></mdb-icon>
+                   {{ el.health }}
+                </td>
+                <td
+                  *ngIf="
+                    i + 1 >= mdbTablePagination.firstItemIndex &&
+                    i < mdbTablePagination.lastItemIndex
+                  "
+                >
+                  <section class="example-section">
+                    <mat-slide-toggle
+                      (change)="toggle($event)"
+                      class="example-margin"
+                      [color]="color"
+                      [checked]="el.isMeterOn"
+                      [disabled]="!el.isApproved"
+                    >
+                      Switch to On/Off
+                    </mat-slide-toggle>
+                  </section>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot class="grey lighten-5 w-100">
+              <tr>
+                <td colspan="5">
+                  <mdb-table-pagination
+                    [tableEl]="tableEl"
+                    [searchDataSource]="elements"
+                  ></mdb-table-pagination>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+      </div>
+    </div>
+    <!-- <router-outlet></router-outlet> -->
+  </div>
+</main>

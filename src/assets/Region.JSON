@@ -1,0 +1,50 @@
+[
+  {
+  "Title": "Arkansas",
+  "NoOfMeter":2200,
+  "imagePath" : "../../assets/state-icon-ar.png",
+  "stromPath":"../../assets/tenor.gif",
+  "isStromPredicted":false,
+  "isApproved":false,
+  "isRequestRaised":false,
+  "isRejected":false,
+  "severity":25,
+  "severityPercentage":"25%"
+  },
+  {
+  "Title": "Louisiana",
+  "NoOfMeter":3200,
+  "imagePath" : "../../assets/state-icon-la.png",
+  "stromPath":"../../assets/tenor.gif",
+  "isStromPredicted":false,
+  "isApproved":true,
+  "isRequestRaised":true,
+  "isRejected":false,   
+  "severity":50  ,
+  "severityPercentage":"50%"
+  },
+  {
+  "Title": "Mississippi",
+  "NoOfMeter":2000,
+  "stromPath":"../../assets/tenor.gif",
+  "isStromPredicted":true,
+  "imagePath" : "../../assets/state-icon-ms.png",
+  "isApproved":false,
+  "isRequestRaised":true ,
+  "isRejected":false,
+  "severity":89  ,
+  "severityPercentage":"75%"  
+  },
+  {
+  "Title": "Texas",
+  "NoOfMeter":1200,
+  "imagePath" : "../../assets/state-icon-tx.png",
+  "stromPath":"../../assets/tenor.gif",
+  "isStromPredicted":true,
+  "isApproved":false,
+  "isRequestRaised":true,
+  "isRejected":true,
+  "severity":10 ,
+  "severityPercentage":"25%"
+  }
+]

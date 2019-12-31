@@ -1,0 +1,94 @@
+
+<section class="mt-lg-5">
+        <!--Grid row-->
+        <div class="row" >
+            <!--Grid column-->
+            <div *ngFor="let region of regions; let i = index" class="col-xl-3 col-md-6 mb-r change-Region" (click)="sendMessageToParent(region.Title,region.isApproved)" >
+    
+                <!--Card-->
+                <mdb-card cascade="true"  class="cascading-admin-card">
+    
+                    <!--Card Data-->
+                    <div class="admin-up">
+                        <div class="fas myshadow" 
+                        
+                        [ngClass]="{
+                            'bg-danger':   region.severity > 75 && region.severity <= 100,
+                            'bg-warning':  region.severity > 50 && region.severity <= 75,
+                            'bg-primary':  region.severity > 25 && region.severity <= 50,
+                            'bg-success':  region.severity > 0 && region.severity <= 25 }" 
+                        
+                        >
+                        <img [src]="region.imagePath" width="50px" className="img-fluid" alt="region.Title" />
+
+                    </div>
+                        <div class="data">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <img *ngIf="region.isStromPredicted" mdbTooltip="Strom is forcasted in this region."  [src]="region.stromPath" width="50px" className="img-fluid"  alt="region.Title" />
+    
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <h5>{{region.Title}}</h5>
+                                        <p>Total # of Meters <strong>{{region.NoOfMeter}}</strong> </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.Card Data-->
+    
+                    <!--Card content-->
+                    <mdb-card-body>
+                        <div class="progress">
+                            <div mdbTooltip="severity : {{region.severity}}" placement="top"
+                            mdbWavesEffect class="progress-bar" role="progressbar" [ngStyle]="{'width': region.severityPercentage}"
+                              aria-valuenow="region.severity"  aria-valuemin="0" aria-valuemax="100"
+                              [ngClass]="{
+                                'bg-danger':   region.severity > 75 && region.severity <= 100,
+                                'bg-warning':  region.severity > 50 && region.severity <= 75,
+                                'bg-primary':  region.severity > 25 && region.severity <= 50,
+                                'bg-success':  region.severity > 0 && region.severity <= 25 }" 
+
+                              ></div>
+                        </div>
+                        <!--Text-->
+                        <p class="card-text">Severity Level</p>
+                        <p *ngIf="!region.isRequestRaised" class="card-text">Request for power shut down
+                            <mat-icon class="pull-right blue_color"  (click)="sendShutDownrequest(region)" mdbTooltip="Click here to raise a power shut down request." placement="top"
+                            mdbWavesEffect> email</mat-icon>
+                        </p>
+                        <p *ngIf="region.isApproved" class="card-text">Power shut down  request status
+                            <mat-icon class="pull-right green_Color" mdbTooltip="Request has been approved." placement="top"
+                            mdbWavesEffect>thumb_up</mat-icon>
+                        </p>
+                        <p *ngIf="region.isRequestRaised && !region.isApproved  && !region.isRejected" class="card-text">Approval is in process
+                            <mat-icon class="pull-right green_Color" mdbTooltip="Approval is pending." placement="top"
+                            mdbWavesEffect>schedule</mat-icon>
+                        </p>
+
+                        <p *ngIf="region.isRejected" class="card-text">Request has been rejected. 
+                            <mat-icon class="pull-right red_Color" mdbTooltip="Request has been rejected." placement="top"
+                            mdbWavesEffect>thumb_down</mat-icon>
+                        </p>
+                        
+                    </mdb-card-body>
+                    <!--/.Card content-->
+                     
+                </mdb-card>
+                <!--/.Card-->
+    
+            </div>
+            <!--Grid column-->
+            
+            <h4 *ngIf="noRecord" class="mb-sm-0 pt-3">
+                <span>No record found.</span>
+            </h4>
+      
+        </div>
+        <!--Grid row-->
+    
+</section>
+ 
+    
