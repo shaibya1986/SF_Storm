@@ -1,7 +1,7 @@
 [
   {
-  "Title": "Arkansas",
-  "NoOfMeter":2200,
+  "title": "Arkansas",
+  "noOfMeter":2200,
   "imagePath" : "../../assets/state-icon-ar.png",
   "stromPath":"../../assets/tenor.gif",
   "isStromPredicted":false,
@@ -12,8 +12,8 @@
   "severityPercentage":"25%"
   },
   {
-  "Title": "Louisiana",
-  "NoOfMeter":3200,
+  "title": "Louisiana",
+  "noOfMeter":3200,
   "imagePath" : "../../assets/state-icon-la.png",
   "stromPath":"../../assets/tenor.gif",
   "isStromPredicted":false,
@@ -24,8 +24,8 @@
   "severityPercentage":"50%"
   },
   {
-  "Title": "Mississippi",
-  "NoOfMeter":2000,
+  "title": "Mississippi",
+  "noOfMeter":2000,
   "stromPath":"../../assets/tenor.gif",
   "isStromPredicted":true,
   "imagePath" : "../../assets/state-icon-ms.png",
@@ -36,11 +36,11 @@
   "severityPercentage":"75%"  
   },
   {
-  "Title": "Texas",
-  "NoOfMeter":1200,
+  "title": "Texas",
+  "noOfMeter":1200,
   "imagePath" : "../../assets/state-icon-tx.png",
   "stromPath":"../../assets/tenor.gif",
-  "isStromPredicted":true,
+  "isStromPredicted":false,
   "isApproved":false,
   "isRequestRaised":true,
   "isRejected":true,

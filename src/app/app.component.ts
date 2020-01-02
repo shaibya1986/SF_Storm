@@ -3,8 +3,6 @@ import { MdbTablePaginationComponent, MdbTableDirective } from 'angular-bootstra
 import { StatsCardComponent } from './stats-card/stats-card.component';
 import { ToastrService } from 'ngx-toastr';
 import { StormserviceService } from './stormservice.service';
-import { fromEvent } from 'rxjs';
-import { debounceTime, map, filter, distinctUntilChanged } from 'rxjs/operators';
 
 
 @Component({
@@ -19,10 +17,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   allelements: any = [];
   elements: any = [];
   previous: any = [];
-  specialPage="";
-  color=""
   isRegionApproved: boolean;
-  headElements = ['id', 'location', 'meter', 'health'];
+  headElements = ['meter Id', 'location', 'meter Name', 'health'];
   searchText: string = '';
   searchRegion: string = '';
   defaultSelectedRegion = "Arkansas";
@@ -119,11 +115,23 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.filterMeterData(this.searchRegion);
   }
 
-  toggle(event){
-    let onOff = event.checked ? 'ON' : 'OFF';
-    this.stormService.setMeterOnOff(onOff).subscribe(()=>{
-      this.toastr.info(`Selected meter is set turn: ${onOff}`, '', {
-        timeOut: 1500
+  toggle(event,element){
+    let onOff = event.checked ? 1 : 0;
+    let onOffmessage = event.checked ? 'On' : 'Off';
+
+    this.stormService.setMeterOnOff(onOff,element).subscribe((response)=>{
+      if(response.apiStatus==='success'){
+        this.toastr.info(`Selected meter is set turn: ${onOffmessage}`, '', {
+          timeOut: 1500
+        });
+      }else{
+        this.toastr.error(`Unable to set meter: ${onOffmessage}`, '', {
+          timeOut: 1000
+        });
+      }
+    },()=>{
+      this.toastr.error(`Unable to set meter: ${onOffmessage}`, '', {
+        timeOut: 1000
       });
     })
 

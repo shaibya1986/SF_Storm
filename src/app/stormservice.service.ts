@@ -32,19 +32,31 @@ export class StormserviceService {
         shareReplay(CACHE_SIZE)
       );
     }
-    return   this.cacheMeterForRegion$[regionName];
+    return this.cacheMeterForRegion$[regionName];
   }
 
   public getMeterOfSelectedRegion(regionName): Observable<any> {
     return this.http.get("assets/Meter.JSON")
       .pipe(debounceTime(3000),
         map(result =>
-          result["filter"](reg => reg.Region === regionName)
+          result["filter"](reg => reg.region === regionName)
         )
       )
   }
-  public setMeterOnOff(position): Observable<any> {
-    console.log(position);
-    return of(true);
+
+
+  // public getMeterOfSelectedRegion(regionName): Observable<any> {
+  //   return this.http.get(`http://127.125.40.160/getMeterStatus/${regionName}`)
+  //   .pipe(map(result=>{
+      
+  //   }));
+  // }
+
+  public setMeterOnOff(position,element): Observable<any> {
+     return this.http.post('http://127.125.40.160/updateMeter/',{
+      "region": element.region,
+      "isMeterOn": position,
+      "meterId":element.meterId
+     });
   }
 }

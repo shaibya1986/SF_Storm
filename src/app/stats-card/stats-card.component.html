@@ -3,7 +3,7 @@
         <!--Grid row-->
         <div class="row" >
             <!--Grid column-->
-            <div *ngFor="let region of regions; let i = index" class="col-xl-3 col-md-6 mb-r change-Region" (click)="sendMessageToParent(region.Title,region.isApproved)" >
+            <div *ngFor="let region of regions; let i = index" class="col-xl-3 col-md-6 mb-r change-Region" (click)="sendMessageToParent(region.title,region.isApproved)" >
     
                 <!--Card-->
                 <mdb-card cascade="true"  class="cascading-admin-card">
@@ -19,18 +19,18 @@
                             'bg-success':  region.severity > 0 && region.severity <= 25 }" 
                         
                         >
-                        <img [src]="region.imagePath" width="50px" className="img-fluid" alt="region.Title" />
+                        <img [src]="region.imagePath" width="50px" className="img-fluid" alt="region.title" />
 
                     </div>
                         <div class="data">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <img *ngIf="region.isStromPredicted" mdbTooltip="Strom is forcasted in this region."  [src]="region.stromPath" width="50px" className="img-fluid"  alt="region.Title" />
+                                        <img *ngIf="region.isStromPredicted" mdbTooltip="Storm is forcasted in this region."  [src]="region.stromPath" width="50px" className="img-fluid"  alt="region.title" />
     
                                     </div>
                                     <div class="col-xs-6">
-                                        <h5>{{region.Title}}</h5>
+                                        <h5>{{region.title}}</h5>
                                         <p>Total # of Meters <strong>{{region.NoOfMeter}}</strong> </p>
                                     </div>
                                 </div>

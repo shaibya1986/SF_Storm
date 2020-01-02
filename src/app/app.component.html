@@ -96,7 +96,7 @@
                   "
                   scope="row"
                 >
-                  {{ el.id }}
+                  {{ el.meterId }}
                 </th>
                 <td
                   *ngIf="
@@ -112,7 +112,7 @@
                     i < mdbTablePagination.lastItemIndex
                   "
                 >
-                  {{ el.meter }}
+                  {{ el.meterName }}
                 </td>
                 <td
                   *ngIf="
@@ -132,7 +132,8 @@
                 >
                   <section class="example-section">
                     <mat-slide-toggle
-                      (change)="toggle($event)"
+                      [(ngModel)]="el.isMeterOn"
+                      (change)="toggle($event,el)"
                       class="example-margin"
                       [color]="color"
                       [checked]="el.isMeterOn"
