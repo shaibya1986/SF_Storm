@@ -1,6 +1,6 @@
 [
   {
-  "title": "Arkansas",
+  "region": "Arkansas",
   "noOfMeter":2200,
   "imagePath" : "../../assets/state-icon-ar.png",
   "stromPath":"../../assets/tenor.gif",
@@ -12,7 +12,7 @@
   "severityPercentage":"25%"
   },
   {
-  "title": "Louisiana",
+  "region": "Louisiana",
   "noOfMeter":3200,
   "imagePath" : "../../assets/state-icon-la.png",
   "stromPath":"../../assets/tenor.gif",
@@ -24,7 +24,7 @@
   "severityPercentage":"50%"
   },
   {
-  "title": "Mississippi",
+  "region": "Mississippi",
   "noOfMeter":2000,
   "stromPath":"../../assets/tenor.gif",
   "isStromPredicted":true,
@@ -36,7 +36,7 @@
   "severityPercentage":"75%"  
   },
   {
-  "title": "Texas",
+  "region": "Texas",
   "noOfMeter":1200,
   "imagePath" : "../../assets/state-icon-tx.png",
   "stromPath":"../../assets/tenor.gif",

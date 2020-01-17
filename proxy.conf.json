@@ -1,0 +1,12 @@
+{
+    "/services/oauth2/*": {
+      "target": "https://login.salesforce.com",
+      "secure": false,
+      "logLevel": "debug",
+      "changeOrigin": true
+    }
+
+    
+}
+  
+ 

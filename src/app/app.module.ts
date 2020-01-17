@@ -8,14 +8,20 @@ import { StatsCardComponent } from './stats-card/stats-card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DemoMaterialModule } from './material-module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ToastrModule } from 'ngx-toastr';
 import { StormserviceService } from './stormservice.service';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { DashBoardComponent } from './dash-board/dash-board.component';
+import { HttpConfigInterceptor } from './interceptor/httpconfig.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
-    StatsCardComponent
+    StatsCardComponent,
+    AccessDeniedComponent,
+    DashBoardComponent
   ],
   imports: [
     FormsModule,
@@ -32,7 +38,8 @@ import { StormserviceService } from './stormservice.service';
     ReactiveFormsModule,
     MDBBootstrapModule.forRoot()
   ],
-  providers: [StormserviceService],
+  providers: [StormserviceService,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

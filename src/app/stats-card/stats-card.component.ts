@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { StormserviceService } from '../stormservice.service';
+import { IRegion } from '../sfstorm.interface';
 @Component({
   selector: 'app-stats-card',
   templateUrl: './stats-card.component.html',
@@ -10,6 +11,7 @@ export class StatsCardComponent implements OnInit {
 
   constructor(private toastr: ToastrService, private stormService : StormserviceService ) { }
   isApproved = true;
+  hasRegionData:boolean
   isNotApproved = false;
   defaultElevation = 12;
   raisedElevation = 18;
@@ -17,11 +19,11 @@ export class StatsCardComponent implements OnInit {
   @Output() messageToEmit = new EventEmitter<string>();
   @Output() isApprovedEmit = new EventEmitter<boolean>();
    
-  allRegions=[];
+  allRegions : IRegion[]=[];
   cards=[];
-  regions = [];
+  regions:IRegion[]=[];
 
-  slides: any = [[]];
+  slides: any = [[]]; 
   chunk(arr, chunkSize) {
     let R = [];
     for (let i = 0, len = arr.length; i < len; i += chunkSize) {
@@ -30,7 +32,9 @@ export class StatsCardComponent implements OnInit {
     return R;
   }
   ngOnInit() {
+    this.hasRegionData = false;
     this.stormService.getRegion.subscribe(data => {
+      this.hasRegionData = true;
       this.regions = data;
       this.allRegions = [...this.regions];
     });
@@ -62,10 +66,10 @@ export class StatsCardComponent implements OnInit {
   filterRegion(regionName) {
     this.regions = [...this.allRegions];
     if(regionName)
-      this.regions = this.regions.filter((region)=>{
-       return region.Title.toLowerCase().search(regionName.toLowerCase())>=0;
+      this.regions = this.regions.filter((reg)=>{
+        return reg.region.toLocaleLowerCase().search(regionName.toLowerCase())>=0;
       });
-     this.noRecord =  this.regions.length > 0 ? false : true;
+     this.noRecord = this.regions.length > 0 ? false : true;
   }
    
 
