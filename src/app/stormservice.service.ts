@@ -81,11 +81,8 @@ export class StormserviceService {
 
 
   getSalesForceData(bearerToken):Observable<any>{
-    // let requestHeaders = new HttpHeaders().set('Content-Type', 'application/json')
-    // .append('Authorization', `Bearer ${bearerToken}`);
-
-    return this.http.get(`${this.getSet.salesForceURL}`)
-    .pipe(  map(response => response["records"]));
+    return this.http.post(`${this.getSet.salesForceURL}`,null)
+    //.pipe(  map(response => response["records"]));
   }
 
 

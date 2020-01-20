@@ -1,12 +1,16 @@
 {
-    "/services/oauth2/*": {
+  "/services/data/*": {
+    "target": "https://sapient-shaibya-dev-ed--c.visualforce.com",
+    "secure": true,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },  
+  "/services/oauth2/*": {
       "target": "https://login.salesforce.com",
-      "secure": false,
+      "secure": true,
       "logLevel": "debug",
       "changeOrigin": true
-    }
-
-    
+  }
 }
   
  
