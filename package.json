@@ -3,12 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "ng serve  --ssl --ssl-key C:\\Users\\shadwive\\SF-Strom\\certificates\\localhost.key  --ssl-cert C:\\Users\\shadwive\\SF-Strom\\certificates\\localhost.crt --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "postinstall": "ng build --aot --prod"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -54,9 +53,5 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
-  },
-  "engines": {
-    "node": "~8.15.1",
-    "npm": "~6.4.1"
   }
 }

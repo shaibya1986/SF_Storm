@@ -1,6 +1,6 @@
 export class GetterSetter {
   private _clientId = '3MVG9_XwsqeYoueK3il2Xs5otrWbZv4V_6oUY1.v5lcO8YPk_iLjOOx0E7Jkofo8n_Zeoyq0ywAIC97aFBsNC';
-  private _callbackURL = "http://localhost:4200"
+  private _callbackURL = "https://localhost:4200"
   private _clientSecret = '2136BDFC61EAC9E4D29439647E609C01D99CBDDBF684EAC7F98A78FF3A54BCAC';
   private _sfdcURL = 'https://login.salesforce.com/services/oauth2/authorize';
   private _endpoint = '/services/oauth2/token';
