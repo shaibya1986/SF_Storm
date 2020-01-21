@@ -69,7 +69,7 @@ export class StormserviceService {
     if (code) 
       return code;
     else 
-      window.location.href = `${this.getSet.sfdcURL}?client_id=${this.getSet.clientId}&redirect_uri= ${this.getSet.callbackURL}&response_type=code`;
+      window.location.href = `${this.getSet.sfdcURL}?client_id=${this.getSet.clientId}&redirect_uri=${this.getSet.callbackURL}&response_type=code`;
   }
   getBearerToken(code):Observable<IBearertoken> {
     var endPointURL = `${this.getSet.endpoint}?client_id=${this.getSet.clientId}&redirect_uri=${this.getSet.callbackURL}&grant_type=authorization_code&code=${code}&client_secret=${this.getSet.ClientSecret}`
