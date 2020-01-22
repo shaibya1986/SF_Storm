@@ -65,25 +65,30 @@ app.get('/webServerStep2', function (req,res){
 	// 			extractAccessToken(err, remoteResponse, remoteBody, res); 
 	// 		} 
     // 	);
-    uname='monsieur.shaibya@gmail.com'
-    pwd = 'Lawsonia_25'
-    var computedURL = sfdcURL+
-	'?client_id='+ jwt_consumer_key+
-	 '&grant_type=password'+
-	 '&client_secret='+consumer_secret+
-	 '&username='+uname+
-	 '&password='+pwd ;
+    // var sfdcURL = 'https://login.salesforce.com/services/oauth2/token' ;
+    // uname='monsieur.shaibya@gmail.com'
+    // pwd = 'Lawsonia_25'
+    // var computedURL = sfdcURL+
+	// '?client_id='+ '3MVG9_XwsqeYoueK3il2Xs5otrWbZv4V_6oUY1.v5lcO8YPk_iLjOOx0E7Jkofo8n_Zeoyq0ywAIC97aFBsNC'+
+	//  '&grant_type=password'+
+	//  '&client_secret='+'2136BDFC61EAC9E4D29439647E609C01D99CBDDBF684EAC7F98A78FF3A54BCAC'+
+	//  '&username='+uname+
+	//  '&password='+pwd ;
  
 
-	 request({ 	url : computedURL,  
-				method:'POST' 
-			},
-			function(err, remoteResponse, remoteBody) {
-				extractAccessToken(err, remoteResponse, remoteBody, res); 
-			} 
-        );  
-        
-	 
+	//  request({ 	url : computedURL,  
+	// 			method:'POST' 
+	// 		},
+	// 		function(err, remoteResponse, remoteBody) {
+	// 			extractAccessToken(err, remoteResponse, remoteBody, res); 
+	// 		} 
+    //     );  
+    
+	var sfdcURL = 'https://login.salesforce.com/services/oauth2/authorize' ;
+	request({ 	url : sfdcURL+'?client_id='+jwt_consumer_key+'&redirect_uri='+redirect_uri+'&response_type=token',  
+				method:'GET' 
+    }).pipe(res); 
+            
 } );
 
 
@@ -96,3 +101,4 @@ app.get('/*', function(req,res) {
 
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8080);
+console.log('listning on' + process.env.PORT);
