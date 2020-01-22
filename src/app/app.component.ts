@@ -34,28 +34,29 @@ export class AppComponent implements OnInit {
 
 
     } else {
-      var code = this.stormService.getAuthorizedCode();
-      if (code) {
-        this.stormService.getBearerToken(code).subscribe((res) => {
-          if (res) {
-            sessionStorage.setItem('bearerToken', res.access_token);
-          }
-          this.isAuthenticating = false;
-          this.isAuthenticated = true;
-          this.AccessDenied = false;
-          this.toastr.success(`Successfully logged in.`, '', {
-            timeOut: 1500
-          });
-        }, (err) => {
-          this.toastr.error(`Unauthorized Access !!`, '', {
-            timeOut: 1000
-          });
-          this.isAuthenticated = false;
-          this.AccessDenied = true;
-          this.isAuthenticating = false;
-        });
+      // var code = this.stormService.getAuthorizedCode();
+      // if (code) {
+      //   this.stormService.getBearerToken(code);
+        // this.stormService.getBearerToken(code).subscribe((res) => {
+        //   if (res) {
+        //     sessionStorage.setItem('bearerToken', res.access_token);
+        //   }
+        //   this.isAuthenticating = false;
+        //   this.isAuthenticated = true;
+        //   this.AccessDenied = false;
+        //   this.toastr.success(`Successfully logged in.`, '', {
+        //     timeOut: 1500
+        //   });
+        // }, (err) => {
+        //   this.toastr.error(`Unauthorized Access !!`, '', {
+        //     timeOut: 1000
+        //   });
+        //   this.isAuthenticated = false;
+        //   this.AccessDenied = true;
+        //   this.isAuthenticating = false;
+        // });
       }
     }
-  }
+ // }
 
 }
