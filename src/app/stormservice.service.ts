@@ -62,39 +62,16 @@ export class StormserviceService {
       "meterId": element.meterId
     });
   }
-  getAuthorizedCode() {
-    // const queryString = window.location.search;
-    // const urlParams = new URLSearchParams(queryString);
-    // const code = urlParams.get('code');
-    // if (code) 
-    //   return code;
-    // else 
-    //   window.location.href = `${this.getSet.sfdcURL}?client_id=${this.getSet.clientId}&redirect_uri=${this.getSet.callbackURL}&response_type=code`;
-  }
-  getBearerToken(code){
-
-    // const queryString = window.location.search;
-    // const urlParams = new URLSearchParams(queryString);
-    // const code = urlParams.get('code');
-    // if (code) 
-    //   return code;
-    // else{
-    //   window.location.href = `${this.getSet.endpoint}?client_id=${this.getSet.clientId}&redirect_uri=${this.getSet.callbackURL}&grant_type=authorization_code&code=${code}&client_secret=${this.getSet.ClientSecret}`
-    // } 
-
-
-    // var endPointURL = `${this.getSet.endpoint}?client_id=${this.getSet.clientId}&redirect_uri=${this.getSet.callbackURL}&grant_type=authorization_code&code=${code}&client_secret=${this.getSet.ClientSecret}`
-    // return this.http.post<IBearertoken>(endPointURL, null);
-    
-  }
+ 
+ 
   getSessionBearerToken(){
-    return sessionStorage.getItem('bearerToken')
+    return sessionStorage.getItem('AccToken')
   }
 
 
   getSalesForceData(bearerToken):Observable<any>{
-    return this.http.post(`${this.getSet.salesForceURL}`,null)
-    //.pipe(  map(response => response["records"]));
+    return this.http.get(`${this.getSet.salesForceURL}`)
+    .pipe(  map(response => response["records"]));
   }
 
 
