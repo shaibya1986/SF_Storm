@@ -8,6 +8,12 @@ const app = express();
  redirect_uri = "https://sf-storm.herokuapp.com",
  consumer_secret = '2136BDFC61EAC9E4D29439647E609C01D99CBDDBF684EAC7F98A78FF3A54BCAC'
 
+ app.all('/proxy',  function(req, res) {     
+    var url = req.header('SalesforceProxy-Endpoint');  
+    request({ url: url, method: req.method, json: req.body, 
+             headers: {'Authorization': req.header('X-Authorization'), 'Content-Type' : 'application/json'}, body:req.body }).pipe(res); 
+});                
+
 function extractAccessToken(err, remoteResponse, remoteBody,res){
 	if (err) { 
 		return res.status(500).end('Error'); 
@@ -50,10 +56,8 @@ app.get('/webServer', function (req,res){
  */
 app.get('/webServerStep2', function (req,res){  
 	var sfdcURL = 'https://login.salesforce.com/services/oauth2/token' ;
-	 request({ 	url : sfdcURL+'?client_id='+
-				 jwt_consumer_key+'&redirect_uri='+
-				 redirect_uri+'&grant_type=authorization_code&code='+
-				 req.query.code+'&client_secret'+consumer_secret,  
+     request({ 	url : sfdcURL+'?client_id='+ jwt_consumer_key+'&redirect_uri='+redirect_uri+'&grant_type=authorization_code&code='+ 
+                req.query.code+'&client_secret'+consumer_secret,  
 				method:'POST' 
 			},
 			function(err, remoteResponse, remoteBody) {
