@@ -55,15 +55,34 @@ app.get('/webServer', function (req,res){
  * Step 2 Web Server Flow - Get token from Code
  */
 app.get('/webServerStep2', function (req,res){  
-	var sfdcURL = 'https://login.salesforce.com/services/oauth2/token' ;
-     request({ 	url : sfdcURL+'?client_id='+ jwt_consumer_key+'&redirect_uri='+redirect_uri+'&grant_type=authorization_code&code='+ 
-                req.query.code+'&client_secret'+consumer_secret,  
+    // var sfdcURL = 'https://login.salesforce.com/services/oauth2/token' ;
+    
+    //  request({ 	url : sfdcURL+'?client_id='+ jwt_consumer_key+'&redirect_uri='+redirect_uri+'&grant_type=authorization_code&code='+ 
+    //             req.query.code+'&client_secret'+consumer_secret,  
+	// 			method:'POST' 
+	// 		},
+	// 		function(err, remoteResponse, remoteBody) {
+	// 			extractAccessToken(err, remoteResponse, remoteBody, res); 
+	// 		} 
+    // 	);
+    uname='monsieur.shaibya@gmail.com'
+    pwd = 'Lawsonia_25'
+    var computedURL = sfdcURL+
+	'?client_id='+ jwt_consumer_key+
+	 '&grant_type=password'+
+	 '&client_secret='+consumer_secret+
+	 '&username='+uname+
+	 '&password='+pwd ;
+ 
+
+	 request({ 	url : computedURL,  
 				method:'POST' 
 			},
 			function(err, remoteResponse, remoteBody) {
 				extractAccessToken(err, remoteResponse, remoteBody, res); 
 			} 
-		);
+        );  
+        
 	 
 } );
 
