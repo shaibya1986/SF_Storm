@@ -20,8 +20,7 @@
       else{
          return results[1] || 0;
       }
-    }
- 
+    } 
 
     if (getURLParam('code')) {
       var access_code = getURLParam('code') ;
@@ -32,7 +31,7 @@
         $.cookie("AccToken",access_code ) ;
       } 
     }else{
-      window.location = 'webServe';
+      window.location = 'webServer';
     }
 
   </script>
