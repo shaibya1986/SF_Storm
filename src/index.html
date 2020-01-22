@@ -22,15 +22,9 @@
       }
     } 
 
-    if (getURLParam('code')) {
+    if (getURLParam('access_token')) {
       alert('inside if');
-      var access_code = getURLParam('code') ;
-      var state = getURLParam('state') ;
-      if(state.includes('webServer')){
-        window.location = 'webServerStep2?code='+access_code+'&state='+state;
-      }else{
-        $.cookie("AccToken",access_code ) ;
-      } 
+        $.cookie("access_token",access_token) ;
     }else{
       alert('inside else');
       window.location = 'webServer';
