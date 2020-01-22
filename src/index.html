@@ -12,23 +12,43 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script>
 
-    function getURLParam(name){
-      var results = new RegExp('[\?&]' + name + '=([^]*)').exec(window.location.href);
-      if (results==null){
-         return null;
+      debugger;
+      if (window.location.hash) {
+        var apiVersion = 'v38.0';
+        
+          var message = decodeURIComponent(window.location.hash.substr(1)),
+              params = message.split('&'),
+          response = {};
+          
+          params.forEach(function (param) {
+              var splitter = param.split('=');
+              response[splitter[0]] = splitter[1];
+          });
+         
+         if (response && response.access_token) {  
+              $.cookie("AccToken",response.access_token ) ;
+              $.cookie("APIVer", apiVersion) ;
+              $.cookie("InstURL",  response.instance_url) ; 
+              $.cookie("idURL",  response.id) ;
+              
+          strngBrks = response.id.split('/');
+          $.cookie("LoggeduserId",  strngBrks[strngBrks.length - 1]) ; 
+              window.location = '/';
+          } else {
+            window.location = 'webServer';
+          }
+      }else{
+        window.location = 'webServer';
       }
-      else{
-         return results[1] || 0;
-      }
-    } 
+     
 
-    if (getURLParam('access_token')) {
+   /* if (getURLParam('access_token')) {
       alert('inside if');
         $.cookie("access_token",access_token) ;
     }else{
       alert('inside else');
       window.location = 'webServer';
-    }
+    } */
 
   </script>
 
