@@ -77,7 +77,7 @@ app.get('/webServerStep2', function (req,res){
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/SF-Strom'));
 
-app.get('https://sf-storm.herokuapp.com/', function(req,res) {
+app.get('/*', function(req,res) {
     res.sendFile(path.join(__dirname+'/dist/SF-Strom/index.html'));
 });
 

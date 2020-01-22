@@ -21,8 +21,7 @@
          return results[1] || 0;
       }
     }
-
-    window.location = 'webServe';
+ 
 
     if (getURLParam('code')) {
       var access_code = getURLParam('code') ;
@@ -32,6 +31,8 @@
       }else{
         $.cookie("AccToken",access_code ) ;
       } 
+    }else{
+      window.location = 'webServe';
     }
 
   </script>
