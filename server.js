@@ -1,7 +1,7 @@
 //Install express server
 const express = require('express');
 const path = require('path');
-
+const request = require('request');
 const app = express();
 
  jwt_consumer_key = '3MVG9_XwsqeYoueK3il2Xs5otrWbZv4V_6oUY1.v5lcO8YPk_iLjOOx0E7Jkofo8n_Zeoyq0ywAIC97aFBsNC',
@@ -33,17 +33,12 @@ function extractAccessToken(err, remoteResponse, remoteBody,res){
  * Step 1 Web Server Flow - Get Code
  */
 app.get('/webServer', function (req,res){  
-	// var isSandbox = req.query.isSandbox;
 	var state = 'webServerProd';
 	var sfdcURL = 'https://login.salesforce.com/services/oauth2/authorize' ;
-	// if(isSandbox == 'true'){
-	// 	sfdcURL = 'https://test.salesforce.com/services/oauth2/authorize' ;
-	// 	state = 'webServerSandbox';
-	// }
-	
-	 request({ 	url : sfdcURL+'?client_id='+
+    console.log('hello world');
+	request({ 	url : sfdcURL+'?client_id='+
 				 jwt_consumer_key+'&redirect_uri='+
-				 callbackURL+'&response_type=code&state='+state,  
+				 redirect_uri+'&response_type=code&state='+state,  
 				method:'GET' 
 			}).pipe(res);	 
 } );
@@ -54,15 +49,10 @@ app.get('/webServer', function (req,res){
  * Step 2 Web Server Flow - Get token from Code
  */
 app.get('/webServerStep2', function (req,res){  
-	// var state = req.query.state;
 	var sfdcURL = 'https://login.salesforce.com/services/oauth2/token' ;
-	// if(state == 'webServerSandbox'){
-	// 	sfdcURL = 'https://test.salesforce.com/services/oauth2/token' ;
-	// }
-	
 	 request({ 	url : sfdcURL+'?client_id='+
 				 jwt_consumer_key+'&redirect_uri='+
-				 callbackURL+'&grant_type=authorization_code&code='+
+				 redirect_uri+'&grant_type=authorization_code&code='+
 				 req.query.code+'&client_secret'+consumer_secret,  
 				method:'POST' 
 			},

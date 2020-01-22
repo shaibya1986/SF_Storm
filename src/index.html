@@ -23,6 +23,7 @@
     } 
 
     if (getURLParam('code')) {
+      alert('inside if');
       var access_code = getURLParam('code') ;
       var state = getURLParam('state') ;
       if(state.includes('webServer')){
@@ -31,6 +32,7 @@
         $.cookie("AccToken",access_code ) ;
       } 
     }else{
+      alert('inside else');
       window.location = 'webServer';
     }
 
