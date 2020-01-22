@@ -9,11 +9,18 @@ const CACHE_SIZE = 1;
 
 @Injectable()
 export class StormserviceService {
+  requestHeaders
   private cacheRegion$: Observable<IRegion[]>;
   private cacheMeterForRegion$: Observable<IMeter>[] = [];
   private getSet = new GetterSetter();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+
+    this.requestHeaders = new HttpHeaders().set('Content-Type', 'application/json')
+    .append('Authorization', `Bearer ${sessionStorage.getItem('AccToken')}`)
+    
+
+   }
 
   public getRegionFromServer(): Observable<IRegion[]> {
     return this.http.get<IRegion[]>("https://api.myjson.com/bins/16z8f4");
@@ -70,8 +77,12 @@ export class StormserviceService {
 
 
   getSalesForceData(bearerToken):Observable<any>{
-    return this.http.get(`${this.getSet.salesForceURL}`)
-    .pipe(  map(response => response["records"]));
+    // return this.http.get(`${this.getSet.salesForceURL}`)
+    // .pipe(  map(response => response["records"]));
+    return this.http.get<any[]>('https://sapient-shaibya-dev-ed--c.visualforce.com/services/data/v42.0/query/?q=SELECT+position__c,category__c,date_posted__c,body__c,Name+FROM+Post__c', { headers: this.requestHeaders})
+    .pipe(
+    map(response => response["records"])
+    );
   }
 
 
