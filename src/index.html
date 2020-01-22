@@ -26,13 +26,12 @@
           });
          
          if (response && response.access_token) {  
-              $.cookie("AccToken",response.access_token ) ;
-              $.cookie("APIVer", apiVersion) ;
-              $.cookie("InstURL",  response.instance_url) ; 
-              $.cookie("idURL",  response.id) ;
-              
-          strngBrks = response.id.split('/');
-          $.cookie("LoggeduserId",  strngBrks[strngBrks.length - 1]) ; 
+              sessionStorage.setItem("AccToken",response.access_token ) ;
+              sessionStorage.setItem("APIVer", apiVersion) ;
+              sessionStorage.setItem("InstURL",  response.instance_url) ; 
+              sessionStorage.setItem("idURL",  response.id) ;
+              strngBrks = response.id.split('/');
+              sessionStorage.setItem("LoggeduserId",  strngBrks[strngBrks.length - 1]) ; 
               window.location = '/';
           } else {
             window.location = 'webServer';
