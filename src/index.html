@@ -11,44 +11,33 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script>
-
-      debugger;
-      if (window.location.hash) {
-        var apiVersion = 'v38.0';
-        
-          var message = decodeURIComponent(window.location.hash.substr(1)),
-              params = message.split('&'),
-          response = {};
-          
-          params.forEach(function (param) {
-              var splitter = param.split('=');
-              response[splitter[0]] = splitter[1];
-          });
-         
-         if (response && response.access_token) {  
-              sessionStorage.setItem("AccToken",response.access_token ) ;
-              sessionStorage.setItem("APIVer", apiVersion) ;
-              sessionStorage.setItem("InstURL",  response.instance_url) ; 
-              sessionStorage.setItem("idURL",  response.id) ;
-              strngBrks = response.id.split('/');
-              sessionStorage.setItem("LoggeduserId",  strngBrks[strngBrks.length - 1]) ; 
-              window.location = '/';
-          } else {
-            window.location = 'webServer';
-          }
-      }else{
-        window.location = 'webServer';
-      }
-     
-
-   /* if (getURLParam('access_token')) {
-      alert('inside if');
-        $.cookie("access_token",access_token) ;
-    }else{
-      alert('inside else');
-      window.location = 'webServer';
-    } */
-
+      if(sessionStorage.getItem("AccToken")==null){
+        if (window.location.hash) {
+          var apiVersion = 'v42.0';
+            var message = decodeURIComponent(window.location.hash.substr(1)),
+            params = message.split('&'),
+            response = {};
+            
+            params.forEach(function (param) {
+                var splitter = param.split('=');
+                response[splitter[0]] = splitter[1];
+            });
+           
+           if (response && response.access_token) {  
+                sessionStorage.setItem("AccToken",response.access_token ) ;
+                sessionStorage.setItem("APIVer", apiVersion) ;
+                sessionStorage.setItem("InstURL",  response.instance_url) ; 
+                sessionStorage.setItem("idURL",  response.id) ;
+                strngBrks = response.id.split('/');
+                sessionStorage.setItem("LoggeduserId",  strngBrks[strngBrks.length - 1]) ; 
+                window.location = '/';
+            } else {
+              window.location = 'webServer';
+            }
+        }else{
+          window.location = 'webServer';
+        }
+      }     
   </script>
 
 </head>
