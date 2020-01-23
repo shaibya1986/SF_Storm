@@ -63,7 +63,7 @@ export class StormserviceService {
   // }
 
   public setMeterOnOff(position, element): Observable<IMeter> {
-    return this.http.post('http://127.125.40.160/updateMeter/', {
+    return this.http.post('http://192.168.43.192:81/api/v1/updateMeter', {
       "region": element.region,
       "isMeterOn": position,
       "meterId": element.meterId
