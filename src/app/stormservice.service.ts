@@ -94,7 +94,7 @@ export class StormserviceService {
     // return this.http.get<IMeter>("https://api.myjson.com/bins/11kbga")
     //   .pipe(map(result => result["filter"](reg => reg.region === regionName)))
     return this.http.get<any>(`
-    https://ap15.salesforce.com/services/data/v42.0/query/?q=SELECT+Id,OwnerId,Name,Status__c,Health__c,Location__c+FROM+Meter__c+WHERE+Name='${regionName}'`, { headers: this.requestHeaders})
+    https://ap15.salesforce.com/services/data/v42.0/query/?q=SELECT+Id,OwnerId,Name,Status__c,Health__c,Location__c+FROM+Meter__c+WHERE+Location__c='${regionName}'`, { headers: this.requestHeaders})
   }
 
 

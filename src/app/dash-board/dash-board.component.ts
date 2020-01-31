@@ -61,7 +61,7 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
 
   }
   getMeterObjects(data): any {
-    return data.map((meter)=>({
+    return data.records.map((meter)=>({
       "meterId": meter["Id"],
       "location": meter["Location__c"],
       "meterName": meter["Name"],
