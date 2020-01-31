@@ -87,6 +87,7 @@
 .rightAlign{
   text-align: right;
   font-weight: bold !important;
+  margin-top: -14px;
 }
 
 .Sun{
