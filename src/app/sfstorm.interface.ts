@@ -20,6 +20,7 @@ export interface IMeter {
     isApproved?: boolean;
     isMeterOn?: number;
     apiStatus?: string;
+    isToggling?: boolean;
 }
 export interface IBearertoken {
     access_token: string;

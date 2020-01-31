@@ -46,7 +46,7 @@ export class StormserviceService {
   }
 
   public getMeterOfSelectedRegion(regionName): Observable<IMeter> {
-    return this.http.get<IMeter>("https://jsonblob.com/api/jsonBlob/a049ffe3-2deb-11ea-ac3c-2bd8564a3c3e")
+    return this.http.get<IMeter>("https://jsonblob.com/aaea99ea-4408-11ea-9fc2-f544aa18ecbd")
       .pipe(debounceTime(3000),
         map(result =>
           result["filter"](reg => reg.region === regionName)

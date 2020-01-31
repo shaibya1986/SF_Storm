@@ -121,12 +121,14 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
   }
 
   toggle(event, element) {
+    element.isToggling = true;
     let ischecked = event.checked;
     let onOff = ischecked ? 1 : 0;
     let onOffmessage = ischecked ? 'On' : 'Off';
     event.source.setDisabledState(true);
     this.stormService.setMeterOnOff(onOff, element).subscribe((response) => {
       event.source.setDisabledState(false);
+      element.isToggling = false;
       if (response.apiStatus === 'success') {
         this.toastr.info(`Selected meter is set turn: ${onOffmessage}`, '', {
           timeOut: 1500
@@ -140,6 +142,7 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
       event.source.setDisabledState(false);
       event.source.checked = !ischecked
       element.isMeterOn = !onOff;
+      element.isToggling = false;
       this.toastr.error(`Unable to set meter: ${onOffmessage}`, '', {
         timeOut: 1000
       });
