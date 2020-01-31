@@ -18,7 +18,7 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
   elements: any = [];
   previous: any = [];
   isRegionApproved: boolean;
-  headElements = ['meter Id', 'location', 'meter Name', 'health'];
+  headElements = ['meter Id', 'location', 'meter Name', 'health', 'is Meter Running'];
   searchText: string = '';
   searchRegion: string = '';
   defaultSelectedRegion = "Arkansas";
@@ -34,7 +34,11 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
     }
   }
 
-  constructor(private router: Router, private cdRef: ChangeDetectorRef, private toastr: ToastrService, private stormService: StormserviceService) { }
+  constructor(
+    private router: Router, 
+    private cdRef: ChangeDetectorRef, 
+    private toastr: ToastrService, 
+    private stormService: StormserviceService) { }
 
   ngOnInit() {
     this.hasNewMeterData = false
