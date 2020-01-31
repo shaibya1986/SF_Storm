@@ -1,5 +1,6 @@
 export interface IRegion {
     region?: string;
+    regionId?: string;
     noOfMeter?: number;
     imagePath?: string;
     stromPath?: string;

@@ -32,12 +32,13 @@ export class StormserviceService {
     let Arkansas$="a0A2v00000vSiZyEAK";
 
     return forkJoin([ 
-    this.http.get<IRegion[]>(`${salesForceURL}/${Louisiana$}`),
-    this.http.get<IRegion[]>(`${salesForceURL}/${Texas$}`),
-    this.http.get<IRegion[]>(`${salesForceURL}/${Mississippi$}`),
-    this.http.get<IRegion[]>(`${salesForceURL}/${Arkansas$}`)
+    this.http.get<IRegion[]>(`${salesForceURL}/${Louisiana$}`, { headers: this.requestHeaders}),
+    this.http.get<IRegion[]>(`${salesForceURL}/${Texas$}`, { headers: this.requestHeaders}),
+    this.http.get<IRegion[]>(`${salesForceURL}/${Mississippi$}`, { headers: this.requestHeaders}),
+    this.http.get<IRegion[]>(`${salesForceURL}/${Arkansas$}`, { headers: this.requestHeaders})
       ]).pipe(map(reg => ([{ 
       "region" : reg["Region__c"],
+      "regionId" : reg["Id"],
       "noOfMeter":0 ,
       "imagePath": this.getImagePath(reg["Region__c"]),
       "stromPath": "../../assets/tenor.gif",

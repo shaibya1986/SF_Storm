@@ -26,11 +26,11 @@ export class AppComponent implements OnInit {
       this.toastr.success(`Successfully logged in.`, '', {
         timeOut: 1500
       });
-      this.stormService.getSalesForceData(bToken).subscribe((res) => {
-        alert(res);
-      },(err)=>{
-        alert(err);
-      });
+      // this.stormService.getSalesForceData(bToken).subscribe((res) => {
+      //   alert(res);
+      // },(err)=>{
+      //   alert(err);
+      // });
 
 
     } else {
