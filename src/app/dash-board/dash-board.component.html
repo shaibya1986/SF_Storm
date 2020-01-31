@@ -155,21 +155,24 @@
                     i < mdbTablePagination.lastItemIndex
                   "
                 >
+
+                 
+
                   <mdb-icon
                     fas
-                    icon="medkit"
-                    *ngIf="el.isMeterOn !== 1"
-                    class="mr-2 green_color"
-                    aria-hidden="true"
-                  ></mdb-icon>
-                  <mdb-icon
-                    fas
-                    icon="medkit"
-                    *ngIf="el.isMeterOn !== 0"
+                    icon="lightbulb"
+                    *ngIf="el.isMeterOn == 1"
                     class="mr-2 red_color"
                     aria-hidden="true"
                   ></mdb-icon>
-                  {{ el.isMeterOn }}
+                  <mdb-icon
+                    fas
+                    icon="lightbulb"
+                    *ngIf="el.isMeterOn == 0"
+                    class="mr-2"
+                    aria-hidden="true"
+                  ></mdb-icon>
+                 
                 </td>
                   
                   
