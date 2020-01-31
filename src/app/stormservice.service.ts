@@ -70,30 +70,7 @@ export class StormserviceService {
     //                     "temp":reg["CurrentTemp__c"]
     //                   }])));
   //}
-  getImagePath(region: any): any {
-    let imagePath = "";
-    switch (region) {
-      case "Arkansas":
-      imagePath="../../assets/state-icon-ar.png"
-      break;
-      case "Louisiana":
-      imagePath="../../assets/state-icon-la.png"
-
-      break;
-      case "Mississippi":
-        imagePath="../../assets/state-icon-ms.png"
-
-      break;
-      case "Texas":
-      imagePath="./../assets/state-icon-tx.png"
-
-      break;
-      default:
-
-      break;
-    }
-    return imagePath;
-  }
+ 
 
   public getRegion() {
     if (!this.cacheRegion$) {
@@ -104,19 +81,20 @@ export class StormserviceService {
     return this.cacheRegion$;
   }
 
-  public getMeterForRegion(regionId) {
-    if (!this.cacheMeterForRegion$[regionId]) {
-      this.cacheMeterForRegion$[regionId] = this.getMeterOfSelectedRegion(regionId).pipe(
+  public getMeterForRegion(regionName) {
+    if (!this.cacheMeterForRegion$[regionName]) {
+      this.cacheMeterForRegion$[regionName] = this.getMeterOfSelectedRegion(regionName).pipe(
         shareReplay(CACHE_SIZE)
       );
     }
-    return this.cacheMeterForRegion$[regionId];
+    return this.cacheMeterForRegion$[regionName];
   }
 
-  public getMeterOfSelectedRegion(regionId): Observable<IMeter> {
+  public getMeterOfSelectedRegion(regionName): Observable<any> {
     // return this.http.get<IMeter>("https://api.myjson.com/bins/11kbga")
     //   .pipe(map(result => result["filter"](reg => reg.region === regionName)))
-    return this.http.get<IMeter>(`https://ap15.salesforce.com/services/data/v20.0/sobjects/Meter__c/${regionId}`, { headers: this.requestHeaders})
+    return this.http.get<any>(`
+    https://ap15.salesforce.com/services/data/v42.0/query/?q=SELECT+Id,OwnerId,Name,Status__c,Health__c,Location__c+FROM+Meter__c+WHERE+Name='${regionName}'`, { headers: this.requestHeaders})
   }
 
 

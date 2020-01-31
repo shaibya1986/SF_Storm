@@ -5,7 +5,7 @@
     <div
       *ngFor="let region of regions; let i = index"
       class="col-xl-3 col-md-6 mb-r change-Region"
-      (click)="sendMessageToParent(region.regionId, region.isApproved)"
+      (click)="sendMessageToParent(region.region, region.isApproved)"
     >
       <!--Card-->
       <mdb-card cascade="true" class="cascading-admin-card">

@@ -21,7 +21,7 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
   headElements = ['meter Id', 'location', 'meter Name', 'health', 'meter On/Off'];
   searchText: string = '';
   searchRegion: string = '';
-  defaultSelectedRegion = "a0A2v00000vSiZyEAK";
+  defaultSelectedRegion = "Arkansas";
   @ViewChild(StatsCardComponent, null) statCard: StatsCardComponent;
   @ViewChild('searchRegiontemp', null) searchRegiontemp: ElementRef;
 
@@ -48,17 +48,29 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private bindMeterAgainstSelectedRegion(regionId) {
+  private bindMeterAgainstSelectedRegion(regionName) {
 
-    this.stormService.getMeterForRegion(regionId).subscribe(data => {
+    this.stormService.getMeterForRegion(regionName).subscribe(data => {
       this.hasNewMeterData = true;
-      this.elements = data;
+      this.elements = this.getMeterObjects(data);
       this.mdbTable.setDataSource(this.elements);
       this.previous = this.mdbTable.getDataSource();
     }, (error) => {
       console.log(error.message);
     });
 
+  }
+  getMeterObjects(data): any {
+    return data.map((meter)=>({
+      "meterId": meter["Id"],
+      "location": meter["Location__c"],
+      "meterName": meter["Name"],
+      "health": meter["Health__c"],
+      "region": meter["Name"],
+      "isApproved": true,
+      "isMeterOn": meter["Status__c"],
+      "isToggling": false 
+    }))
   }
 
   ngAfterViewInit() {
