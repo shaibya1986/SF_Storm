@@ -22,7 +22,7 @@ export class StormserviceService {
 
    }
 
-  public getRegionFromServer(): Observable<IRegion[]> {
+  public getRegionFromServer(): Observable<any[]> {
     //return this.http.get<IRegion[]>("https://api.myjson.com/bins/1cyzei");
     // return this.http.get<IRegion[]>("http://192.168.43.192:81/api/v1/getMeterStatus/bvc");
     let salesForceURL = "https://ap15.salesforce.com/services/data/v20.0/sobjects/WeatherInfo__c";
@@ -32,25 +32,28 @@ export class StormserviceService {
     let Arkansas$="a0A2v00000vSiZyEAK";
 
     return forkJoin([ 
-    this.http.get<IRegion[]>(`${salesForceURL}/${Louisiana$}`, { headers: this.requestHeaders}),
-    this.http.get<IRegion[]>(`${salesForceURL}/${Texas$}`, { headers: this.requestHeaders}),
-    this.http.get<IRegion[]>(`${salesForceURL}/${Mississippi$}`, { headers: this.requestHeaders}),
-    this.http.get<IRegion[]>(`${salesForceURL}/${Arkansas$}`, { headers: this.requestHeaders})
-      ]).pipe(map(reg => ([{ 
-      "region" : reg["Region__c"],
-      "regionId" : reg["Id"],
-      "noOfMeter":0 ,
-      "imagePath": this.getImagePath(reg["Region__c"]),
-      "stromPath": "../../assets/tenor.gif",
-      "isStromPredicted": reg["StormAlert__c"],
-      "isApproved": false,
-      "isRequestRaised": true,
-      "isRejected": false,
-      "severity": 89,
-      "severityPercentage": "75%",
-      "forecast":reg["Description__c"],
-      "temp":reg["CurrentTemp__c"]
-    }])));;
+    this.http.get(`${salesForceURL}/${Louisiana$}`, { headers: this.requestHeaders}),
+    this.http.get(`${salesForceURL}/${Texas$}`, { headers: this.requestHeaders}),
+    this.http.get(`${salesForceURL}/${Mississippi$}`, { headers: this.requestHeaders}),
+    this.http.get(`${salesForceURL}/${Arkansas$}`, { headers: this.requestHeaders})
+      ]);
+      
+  }
+    //   .pipe(map(reg => ([{ 
+    //   "region" : reg["Region__c"],
+    //   "regionId" : reg["Id"],
+    //   "noOfMeter":0 ,
+    //   "imagePath": this.getImagePath(reg["Region__c"]),
+    //   "stromPath": "../../assets/tenor.gif",
+    //   "isStromPredicted": reg["StormAlert__c"],
+    //   "isApproved": false,
+    //   "isRequestRaised": true,
+    //   "isRejected": false,
+    //   "severity": 89,
+    //   "severityPercentage": "75%",
+    //   "forecast":reg["Description__c"],
+    //   "temp":reg["CurrentTemp__c"]
+    // }])));;
 
     // return this.http.get<IRegion[]>(`https://ap15.salesforce.com/services/data/v20.0/sobjects/WeatherInfo__c/${regionId}`)
     // .pipe(map(reg => ([{ "region" : reg["Region__c"],
@@ -66,7 +69,7 @@ export class StormserviceService {
     //                     "forecast":reg["Description__c"],
     //                     "temp":reg["CurrentTemp__c"]
     //                   }])));
-  }
+  //}
   getImagePath(region: any): any {
     let imagePath = "";
     switch (region) {
@@ -113,7 +116,7 @@ export class StormserviceService {
   public getMeterOfSelectedRegion(regionId): Observable<IMeter> {
     // return this.http.get<IMeter>("https://api.myjson.com/bins/11kbga")
     //   .pipe(map(result => result["filter"](reg => reg.region === regionName)))
-    return this.http.get<IMeter>(`https://ap15.salesforce.com/services/data/v20.0/sobjects/Meter__c/${regionId}`)
+    return this.http.get<IMeter>(`https://ap15.salesforce.com/services/data/v20.0/sobjects/Meter__c/${regionId}`, { headers: this.requestHeaders})
   }
 
 
@@ -138,14 +141,14 @@ export class StormserviceService {
   }
 
 
-  getSalesForceData(bearerToken):Observable<any>{
-    // return this.http.get(`${this.getSet.salesForceURL}`)
-    // .pipe(  map(response => response["records"]));
-    return this.http.get<any[]>('https://sapient-shaibya-dev-ed--c.visualforce.com/services/data/v42.0/query/?q=SELECT+position__c,category__c,date_posted__c,body__c,Name+FROM+Post__c', { headers: this.requestHeaders})
-    .pipe(
-    map(response => response["records"])
-    );
-  }
+  // getSalesForceData(bearerToken):Observable<any>{
+  //   // return this.http.get(`${this.getSet.salesForceURL}`)
+  //   // .pipe(  map(response => response["records"]));
+  //   return this.http.get<any[]>('https://sapient-shaibya-dev-ed--c.visualforce.com/services/data/v42.0/query/?q=SELECT+position__c,category__c,date_posted__c,body__c,Name+FROM+Post__c', { headers: this.requestHeaders})
+  //   .pipe(
+  //   map(response => response["records"])
+  //   );
+  // }
 
 
 }

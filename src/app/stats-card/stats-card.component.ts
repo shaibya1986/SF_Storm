@@ -35,13 +35,53 @@ export class StatsCardComponent implements OnInit {
     this.hasRegionData = false;
     this.stormService.getRegion().subscribe(data => {
       this.hasRegionData = true;
-      this.regions = data;
+      this.regions = this.getIRegionObjects(data);
       this.allRegions = [...this.regions];
     });
     this.slides = this.chunk(this.cards, 3);
   }
+  getIRegionObjects(data: any[]): IRegion[] {
+     return data.map((reg)=> ({ 
+        "region" : reg["Region__c"],
+        "noOfMeter":0 ,
+        "regionId":reg["Id"],
+        "imagePath": this.getImagePath(reg["Region__c"]),
+        "stromPath": "../../assets/tenor.gif",
+        "isStromPredicted": reg["StormAlert__c"],
+        "isApproved": false,
+        "isRequestRaised": true,
+        "isRejected": false,
+        "severity": 89,
+        "severityPercentage": "75%",
+        "forecast":reg["Description__c"],
+        "temp":reg["CurrentTemp__c"] 
+      }));
+  }
 
+  getImagePath(region: any): any {
+    let imagePath = "";
+    switch (region) {
+      case "Arkansas":
+      imagePath="../../assets/state-icon-ar.png"
+      break;
+      case "Louisiana":
+      imagePath="../../assets/state-icon-la.png"
 
+      break;
+      case "Mississippi":
+        imagePath="../../assets/state-icon-ms.png"
+
+      break;
+      case "Texas":
+      imagePath="./../assets/state-icon-tx.png"
+
+      break;
+      default:
+
+      break;
+    }
+    return imagePath;
+  }
   showSelectedRegion(region: string) {
     this.toastr.info(`Selected region : ${region}`, '', {
       timeOut: 1000
