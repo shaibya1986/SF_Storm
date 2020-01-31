@@ -33,7 +33,7 @@ export class StatsCardComponent implements OnInit {
   }
   ngOnInit() {
     this.hasRegionData = false;
-    this.stormService.getRegion.subscribe(data => {
+    this.stormService.getRegion().subscribe(data => {
       this.hasRegionData = true;
       this.regions = data;
       this.allRegions = [...this.regions];

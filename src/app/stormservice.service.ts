@@ -1,5 +1,5 @@
 import { HttpClient, HttpRequest, HttpResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, from, of } from 'rxjs';
+import { Observable, from, of, forkJoin } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { shareReplay, map, debounceTime, tap } from 'rxjs/operators';
 import { IRegion, IMeter, IBearertoken } from './sfstorm.interface';
@@ -23,11 +23,75 @@ export class StormserviceService {
    }
 
   public getRegionFromServer(): Observable<IRegion[]> {
-    return this.http.get<IRegion[]>("https://api.myjson.com/bins/1cyzei");
+    //return this.http.get<IRegion[]>("https://api.myjson.com/bins/1cyzei");
     // return this.http.get<IRegion[]>("http://192.168.43.192:81/api/v1/getMeterStatus/bvc");
+    let salesForceURL = "https://ap15.salesforce.com/services/data/v20.0/sobjects/WeatherInfo__c";
+    let Louisiana$ = "a0A2v00000vSiZYEA0";
+    let Texas$ = "a0A2v00000vSiYpEAK";
+    let Mississippi$ ="a0A2v00000vSiYaEAK" ;
+    let Arkansas$="a0A2v00000vSiZyEAK";
+
+    return forkJoin([ 
+    this.http.get<IRegion[]>(`${salesForceURL}/${Louisiana$}`),
+    this.http.get<IRegion[]>(`${salesForceURL}/${Texas$}`),
+    this.http.get<IRegion[]>(`${salesForceURL}/${Mississippi$}`),
+    this.http.get<IRegion[]>(`${salesForceURL}/${Arkansas$}`)
+      ]).pipe(map(reg => ([{ 
+      "region" : reg["Region__c"],
+      "noOfMeter":0 ,
+      "imagePath": this.getImagePath(reg["Region__c"]),
+      "stromPath": "../../assets/tenor.gif",
+      "isStromPredicted": reg["StormAlert__c"],
+      "isApproved": false,
+      "isRequestRaised": true,
+      "isRejected": false,
+      "severity": 89,
+      "severityPercentage": "75%",
+      "forecast":reg["Description__c"],
+      "temp":reg["CurrentTemp__c"]
+    }])));;
+
+    // return this.http.get<IRegion[]>(`https://ap15.salesforce.com/services/data/v20.0/sobjects/WeatherInfo__c/${regionId}`)
+    // .pipe(map(reg => ([{ "region" : reg["Region__c"],
+    //                     "noOfMeter":0 ,
+    //                     "imagePath": this.getImagePath(reg["Region__c"]),
+    //                     "stromPath": "../../assets/tenor.gif",
+    //                     "isStromPredicted": reg["StormAlert__c"],
+    //                     "isApproved": false,
+    //                     "isRequestRaised": true,
+    //                     "isRejected": false,
+    //                     "severity": 89,
+    //                     "severityPercentage": "75%",
+    //                     "forecast":reg["Description__c"],
+    //                     "temp":reg["CurrentTemp__c"]
+    //                   }])));
+  }
+  getImagePath(region: any): any {
+    let imagePath = "";
+    switch (region) {
+      case "Arkansas":
+      imagePath="../../assets/state-icon-ar.png"
+      break;
+      case "Louisiana":
+      imagePath="../../assets/state-icon-la.png"
+
+      break;
+      case "Mississippi":
+        imagePath="../../assets/state-icon-ms.png"
+
+      break;
+      case "Texas":
+      imagePath="./../assets/state-icon-tx.png"
+
+      break;
+      default:
+
+      break;
+    }
+    return imagePath;
   }
 
-  get getRegion() {
+  public getRegion() {
     if (!this.cacheRegion$) {
       this.cacheRegion$ = this.getRegionFromServer().pipe(
         shareReplay(CACHE_SIZE)
@@ -36,18 +100,19 @@ export class StormserviceService {
     return this.cacheRegion$;
   }
 
-  public getMeterForRegion(regionName) {
-    if (!this.cacheMeterForRegion$[regionName]) {
-      this.cacheMeterForRegion$[regionName] = this.getMeterOfSelectedRegion(regionName).pipe(
+  public getMeterForRegion(regionId) {
+    if (!this.cacheMeterForRegion$[regionId]) {
+      this.cacheMeterForRegion$[regionId] = this.getMeterOfSelectedRegion(regionId).pipe(
         shareReplay(CACHE_SIZE)
       );
     }
-    return this.cacheMeterForRegion$[regionName];
+    return this.cacheMeterForRegion$[regionId];
   }
 
-  public getMeterOfSelectedRegion(regionName): Observable<IMeter> {
-    return this.http.get<IMeter>("https://api.myjson.com/bins/11kbga")
-      .pipe(map(result => result["filter"](reg => reg.region === regionName)))
+  public getMeterOfSelectedRegion(regionId): Observable<IMeter> {
+    // return this.http.get<IMeter>("https://api.myjson.com/bins/11kbga")
+    //   .pipe(map(result => result["filter"](reg => reg.region === regionName)))
+    return this.http.get<IMeter>(`https://ap15.salesforce.com/services/data/v20.0/sobjects/Meter__c/${regionId}`)
   }
 
 
