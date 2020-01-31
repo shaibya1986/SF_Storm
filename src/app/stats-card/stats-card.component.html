@@ -54,7 +54,7 @@
 
         <!--Card content-->
         <mdb-card-body>
-          <div class="progress">
+          <!-- <div class="progress">
             <div
               mdbTooltip="severity : {{ region.severity }}"
               placement="top"
@@ -73,8 +73,20 @@
               }"
             ></div>
           </div>
-          <!--Text-->
-          <p class="card-text">Severity Level</p>
+          <p class="card-text">Severity Level</p> -->
+          <p class="card-text">
+            <i [ngClass]="{
+              'fad fa-sun': region.forecast=='Sunny',
+              'fad fa-cloud': region.forecast=='Cloudy',
+              'fad fa-cloud-showers-heavy': region.forecast=='Rainy',
+              'fad fa-thunderstorm-sun': region.forecast=='Thunderstorm',
+            }" ></i>
+            
+          </p>
+          <p class="card-text">{{region.temp}}</p>
+
+          <p class="card-text">{{region.forecast}}</p>
+
           <p *ngIf="!region.isRequestRaised" class="card-text">
             Request for power shut down
             <mat-icon
@@ -83,8 +95,7 @@
               mdbTooltip="Click here to raise a power shut down request."
               placement="top"
               mdbWavesEffect
-            >
-              email</mat-icon
+            >email</mat-icon
             >
           </p>
           <p *ngIf="region.isApproved" class="card-text">
@@ -97,12 +108,7 @@
               >thumb_up</mat-icon
             >
           </p>
-          <p
-            *ngIf="
-              region.isRequestRaised && !region.isApproved && !region.isRejected
-            "
-            class="card-text"
-          >
+          <p  *ngIf="region.isRequestRaised && !region.isApproved && !region.isRejected"  class="card-text">
             Approval is in process
             <mat-icon
               class="pull-right green_Color"
@@ -112,7 +118,6 @@
               >schedule</mat-icon
             >
           </p>
-
           <p *ngIf="region.isRejected" class="card-text">
             Request has been rejected.
             <mat-icon

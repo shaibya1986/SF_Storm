@@ -23,7 +23,7 @@ export class StormserviceService {
    }
 
   public getRegionFromServer(): Observable<IRegion[]> {
-    return this.http.get<IRegion[]>("https://api.myjson.com/bins/16z8f4");
+    return this.http.get<IRegion[]>("https://api.myjson.com/bins/1cyzei");
     // return this.http.get<IRegion[]>("http://192.168.43.192:81/api/v1/getMeterStatus/bvc");
   }
 

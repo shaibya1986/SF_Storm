@@ -18,7 +18,7 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
   elements: any = [];
   previous: any = [];
   isRegionApproved: boolean;
-  headElements = ['meter Id', 'location', 'meter Name', 'health', 'is Meter Running'];
+  headElements = ['meter Id', 'location', 'meter Name', 'health', 'meter On/Off'];
   searchText: string = '';
   searchRegion: string = '';
   defaultSelectedRegion = "Arkansas";
