@@ -76,14 +76,14 @@
           <p class="card-text">Severity Level</p> -->
           <p class="card-text rightAlign">
             <i class="fa" [ngClass]="{
-              'fa-sun': region.forecast=='Sunny',
-              'fa-cloud': region.forecast=='Cloudy',
-              'fa-cloud-showers-heavy': region.forecast=='Rainy',
-              'fa-thunderstorm-sun': region.forecast=='Thunderstorm'
+              'fa-sun Sun': region.forecast=='Sunny',
+              'fa-cloud Cloud': region.forecast=='Cloudy',
+              'fa-cloud-showers-heavy Rain': region.forecast=='Rainy',
+              'fa-bolt Thunder': region.forecast=='Thunderstorm'
             }"></i>
             {{region.temp}}
           </p>
-          <p class="card-text rightAlign">{{region.forecast}}</p>
+          <p class="card-text rightAlign">{{region.forecast}}&#8451;</p>
           <p *ngIf="!region.isRequestRaised" class="card-text">
             Request for power shut down
             <mat-icon

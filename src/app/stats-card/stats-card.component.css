@@ -86,6 +86,23 @@
 }
 .rightAlign{
   text-align: right;
+  font-weight: bold !important;
 }
 
+.Sun{
+  font-size: 30px;
+  color: gold;
+}
+.Rain{
+  font-size: 30px;
+  color: #005affa6;
+}
+.Cloud{
+  font-size: 30px;
+  color: #6a6d66;
+}
+.Thunder{
+  font-size: 30px;
+  color: #e61e1e;
+}
  
