@@ -155,9 +155,6 @@
                     i < mdbTablePagination.lastItemIndex
                   "
                 >
-
-                 
-
                   <mdb-icon
                     fas
                     icon="lightbulb"
@@ -169,7 +166,7 @@
                     fas
                     icon="lightbulb"
                     *ngIf="el.isMeterOn == 0"
-                    class="mr-2"
+                    class="mr-2 off_color"
                     aria-hidden="true"
                   ></mdb-icon>
                  
@@ -201,7 +198,7 @@
   
               <tfoot class="grey lighten-5 w-100">
                 <tr>
-                  <td colspan="5">
+                  <td colspan="6">
                     <mdb-table-pagination
                       [tableEl]="tableEl"
                       [searchDataSource]="elements"
