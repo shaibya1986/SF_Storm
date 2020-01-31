@@ -4,9 +4,9 @@ const path = require('path');
 const request = require('request');
 const app = express();
 
- jwt_consumer_key = '3MVG9_XwsqeYoueK3il2Xs5otrWbZv4V_6oUY1.v5lcO8YPk_iLjOOx0E7Jkofo8n_Zeoyq0ywAIC97aFBsNC',
+ jwt_consumer_key = '3MVG9G9pzCUSkzZtV08UVbjkudkQJ_wLuu8b2zBsdLVqvFXJG9uZfIoJmawq.VaHbhclfQe8T85TNh5bb301D',
  redirect_uri = "https://sf-storm.herokuapp.com",
- consumer_secret = '2136BDFC61EAC9E4D29439647E609C01D99CBDDBF684EAC7F98A78FF3A54BCAC'
+ consumer_secret = 'B88C3B5FE45876C8B6CC7CBE64A7BBE9A777F5D745EA2435B7D171B94600DB6A'
 
 app.all('/proxy',  function(req, res) {     
 var url = req.header('SalesforceProxy-Endpoint');  
