@@ -84,5 +84,8 @@
 .change-Region {
   cursor: pointer;
 }
+.rightAlign{
+  text-align: right;
+}
 
  
