@@ -2,7 +2,12 @@
     color:red;
     font-size: 25px;
 }
-
+.red{
+    color:red;
+}
+.green{
+    color:green;
+}
 .off_color{ 
     color:#b3b3b3;
     font-size: 25px;

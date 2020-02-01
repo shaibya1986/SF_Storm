@@ -136,14 +136,14 @@
                       fas
                       icon="medkit"
                       *ngIf="el.health === 'Good'"
-                      class="mr-2 green_color"
+                      class="mr-2 green"
                       aria-hidden="true"
                     ></mdb-icon>
                     <mdb-icon
                       fas
                       icon="medkit"
-                      *ngIf="el.health !== 'Good'"
-                      class="mr-2 red_color"
+                      *ngIf="el.health == 'Bad'"
+                      class="mr-2 red"
                       aria-hidden="true"
                     ></mdb-icon>
                     {{ el.health }}

@@ -14,10 +14,8 @@
           <div
             class="fas myshadow"
             [ngClass]="{
-              'bg-danger': region.severity > 75 && region.severity <= 100,
-              'bg-warning': region.severity > 50 && region.severity <= 75,
-              'bg-primary': region.severity > 25 && region.severity <= 50,
-              'bg-success': region.severity > 0 && region.severity <= 25
+              'bg-danger': region.isStromPredicted,
+              'bg-success': !region.isStromPredicted
             }"
           >
             <img
@@ -78,7 +76,8 @@
             <i class="fa" [ngClass]="{
               'fa-sun Sun': region.forecast=='Sunny',
               'fa-cloud Cloud': region.forecast=='Cloudy',
-              'fa-cloud-showers-heavy Rain': region.forecast=='Rainy',
+              'fa-fog Cloud': region.forecast=='Fog',
+              'fa-cloud-showers-heavy Rain': region.forecast=='Rain',
               'fa-bolt Thunder': region.forecast=='Thunderstorm'
             }"></i>
             {{region.temp}}&#8451;
