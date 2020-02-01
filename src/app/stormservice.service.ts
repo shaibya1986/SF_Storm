@@ -39,11 +39,9 @@ export class StormserviceService {
     //   ]);
 
     
-    let meterURL = `https://ap15.salesforce.com/services/data/v42.0/query/?
-    q=SELECT+Id,Location__c+FROM+Meter__c`;
+    let meterURL = `https://ap15.salesforce.com/services/data/v42.0/query/?q=SELECT+Id,Location__c+FROM+Meter__c`;
  
-    let regionURL = `https://ap15.salesforce.com/services/data/v42.0/query/?
-    q=SELECT+Id,Region__c,StormAlert__c,Description__c,CurrentTemp__c+FROM+WeatherInfo__c`
+    let regionURL = `https://ap15.salesforce.com/services/data/v42.0/query/?q=SELECT+Id,Region__c,StormAlert__c,Description__c,CurrentTemp__c+FROM+WeatherInfo__c`
 
     return forkJoin([ 
       this.http.get(`${regionURL}`, { headers: this.requestHeaders}),
