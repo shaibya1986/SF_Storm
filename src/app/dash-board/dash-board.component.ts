@@ -48,7 +48,7 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
       timeOut: 1500
     });
 
-  
+    this.getRegularMeterUpdateOfSelectedRegion();
   }
   getRegularMeterUpdateOfSelectedRegion() {
 
@@ -70,7 +70,7 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
       this.elements = this.getMeterObjects(data);
       this.mdbTable.setDataSource(this.elements);
       this.previous = this.mdbTable.getDataSource();
-      this.getRegularMeterUpdateOfSelectedRegion()
+      // this.getRegularMeterUpdateOfSelectedRegion()
     }, (error) => {
       console.log(error.message);
     });
