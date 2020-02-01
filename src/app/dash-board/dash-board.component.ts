@@ -109,7 +109,8 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
   }
   filterMeterData(region: string) {
     this.hasNewMeterData = false;
-    this.defaultSelectedRegion = region;
+    if(region && region!='')
+        this.defaultSelectedRegion = region;
     if (region) {
       this.bindMeterAgainstSelectedRegion(region)
     }
@@ -122,8 +123,7 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
   }
 
   getMessage(message: string) {
-    if(message && message!='')
-      this.defaultSelectedRegion = message ;
+    this.defaultSelectedRegion = message ;
     this.filterMeterData(message)
   } 
   getIsApproved(IsApproved: boolean) {
