@@ -4,6 +4,9 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { StatsCardComponent } from '../stats-card/stats-card.component';
 import { StormserviceService } from '../stormservice.service';
+import { timer, from } from 'rxjs'
+import { map, concatMap } from 'rxjs/operators' 
+
 
 @Component({
   selector: 'app-dash-board',
@@ -106,6 +109,9 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
   getMessage(message: string) {
     this.filterMeterData(message)
   }
+
+
+   
 
   getIsApproved(IsApproved: boolean) {
     this.isRegionApproved = IsApproved;
