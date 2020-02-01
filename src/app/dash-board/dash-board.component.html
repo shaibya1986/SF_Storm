@@ -182,6 +182,7 @@
                   >
                     <section class="example-section">
                       <mat-slide-toggle
+                         *ngIf="!el.isToggling"
                         [(ngModel)]="el.isMeterOn"
                         (change)="toggle($event, el)"
                         class="example-margin"
@@ -189,9 +190,8 @@
                         [disabled]="!el.isApproved"
                       >
                         Switch to On/Off
-                        <img src="../../assets/inProgress.gif"style="width: 120px;" class="loading" alt="loading..."  *ngIf="el.isToggling">
                       </mat-slide-toggle>
-                      
+                      <img src="../../assets/inProgress.gif" style="width: 120px;" class="loading" alt="loading..."  *ngIf="el.isToggling">
                     </section>
                   </td>
                 </tr>
