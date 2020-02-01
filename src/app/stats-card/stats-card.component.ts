@@ -59,7 +59,7 @@ export class StatsCardComponent implements OnInit {
       }));
   }
   getNoOfMeterForRegion(meters: any, region: any) {
-    return meters.filter((meter)=>{ return meter["Location__c"] == region});
+    return meters.filter((meter)=>{ return meter["Location__c"] == region}).length;
   }
 
   getImagePath(region: any): any {
