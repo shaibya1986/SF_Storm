@@ -49,7 +49,6 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
   }
 
   private bindMeterAgainstSelectedRegion(regionName) {
-
     this.stormService.getMeterForRegion(regionName).subscribe(data => {
       this.hasNewMeterData = true;
       this.elements = this.getMeterObjects(data);

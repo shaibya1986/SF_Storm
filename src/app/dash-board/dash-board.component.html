@@ -136,7 +136,7 @@
                       fas
                       icon="medkit"
                       *ngIf="el.health === 'Good'"
-                      class="mr-2 green"
+                      class="mr-2 green_bag"
                       aria-hidden="true"
                     ></mdb-icon>
                     <mdb-icon
@@ -191,7 +191,11 @@
                       >
                         Switch to On/Off
                       </mat-slide-toggle>
-                      <img src="../../assets/inProgress.gif" style="width: 120px;" class="loading" alt="loading..."  *ngIf="el.isToggling">
+                      <div  *ngIf="el.isToggling" class="text-center">
+                        <div class="spinner-border text-info " role="status">
+                          <span class="sr-only ">Loading...</span>
+                        </div>
+                      </div>
                     </section>
                   </td>
                 </tr>

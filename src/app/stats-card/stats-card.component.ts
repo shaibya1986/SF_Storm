@@ -41,14 +41,14 @@ export class StatsCardComponent implements OnInit {
     this.slides = this.chunk(this.cards, 3);
   }
   getIRegionObjects(data: any[]): IRegion[] {
-     return data.map((reg)=> ({ 
+     return data.map((reg,index) => ({ 
         "region" : reg["Region__c"],
         "noOfMeter":0 ,
         "regionId":reg["Id"],
         "imagePath": this.getImagePath(reg["Region__c"]),
         "stromPath": "../../assets/tenor.gif",
         "isStromPredicted": reg["StormAlert__c"],
-        "isApproved": false,
+        "isApproved": index%2 == 0 ? true : false,
         "isRequestRaised": true,
         "isRejected": false,
         "severity": 89,
