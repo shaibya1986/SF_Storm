@@ -42,9 +42,9 @@ export class StatsCardComponent implements OnInit {
   }
   getIRegionObjects(data: any[]): IRegion[] {
 
-     return data[0].map((reg,index) => ({ 
+     return data[0].records.map((reg,index) => ({ 
         "region" : reg["Region__c"],
-        "noOfMeter": this.getNoOfMeterForRegion(data[1],reg["Region__c"]) ,
+        "noOfMeter": this.getNoOfMeterForRegion(data[1].records,reg["Region__c"]) ,
         "regionId":reg["Id"],
         "imagePath": this.getImagePath(reg["Region__c"]),
         "stromPath": "../../assets/tenor.gif",
