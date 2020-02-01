@@ -23,20 +23,33 @@ export class StormserviceService {
    }
 
   public getRegionFromServer(): Observable<any[]> {
-    //return this.http.get<IRegion[]>("https://api.myjson.com/bins/1cyzei");
-    // return this.http.get<IRegion[]>("http://192.168.43.192:81/api/v1/getMeterStatus/bvc");
-    let salesForceURL = "https://ap15.salesforce.com/services/data/v20.0/sobjects/WeatherInfo__c";
-    let Louisiana$ = "a0A2v00000vSiZYEA0";
-    let Texas$ = "a0A2v00000vSiYpEAK";
-    let Mississippi$ ="a0A2v00000vSiYaEAK" ;
-    let Arkansas$="a0A2v00000vSiZyEAK";
+    // //return this.http.get<IRegion[]>("https://api.myjson.com/bins/1cyzei");
+    // // return this.http.get<IRegion[]>("http://192.168.43.192:81/api/v1/getMeterStatus/bvc");
+    // let salesForceURL = "https://ap15.salesforce.com/services/data/v20.0/sobjects/WeatherInfo__c";
+    // let Louisiana$ = "a0A2v00000vSiZYEA0";
+    // let Texas$ = "a0A2v00000vSiYpEAK";
+    // let Mississippi$ ="a0A2v00000vSiYaEAK" ;
+    // let Arkansas$="a0A2v00000vSiZyEAK";
+
+    // return forkJoin([ 
+    // this.http.get(`${salesForceURL}/${Louisiana$}`, { headers: this.requestHeaders}),
+    // this.http.get(`${salesForceURL}/${Texas$}`, { headers: this.requestHeaders}),
+    // this.http.get(`${salesForceURL}/${Mississippi$}`, { headers: this.requestHeaders}),
+    // this.http.get(`${salesForceURL}/${Arkansas$}`, { headers: this.requestHeaders})
+    //   ]);
+
+    
+    let meterURL = `https://ap15.salesforce.com/services/data/v42.0/query/?
+    q=SELECT+Id,Location__c+FROM+Meter__c`;
+ 
+    let regionURL = `https://ap15.salesforce.com/services/data/v42.0/query/?
+    q=SELECT+Id,Region__c,StormAlert__c,Description__c,CurrentTemp__c+FROM+WeatherInfo__c`
 
     return forkJoin([ 
-    this.http.get(`${salesForceURL}/${Louisiana$}`, { headers: this.requestHeaders}),
-    this.http.get(`${salesForceURL}/${Texas$}`, { headers: this.requestHeaders}),
-    this.http.get(`${salesForceURL}/${Mississippi$}`, { headers: this.requestHeaders}),
-    this.http.get(`${salesForceURL}/${Arkansas$}`, { headers: this.requestHeaders})
+      this.http.get(`${regionURL}`, { headers: this.requestHeaders}),
+      this.http.get(`${meterURL}`, { headers: this.requestHeaders})
       ]);
+
       
   }
     //   .pipe(map(reg => ([{ 

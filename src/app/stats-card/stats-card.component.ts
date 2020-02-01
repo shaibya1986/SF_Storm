@@ -41,9 +41,10 @@ export class StatsCardComponent implements OnInit {
     this.slides = this.chunk(this.cards, 3);
   }
   getIRegionObjects(data: any[]): IRegion[] {
-     return data.map((reg,index) => ({ 
+
+     return data[0].map((reg,index) => ({ 
         "region" : reg["Region__c"],
-        "noOfMeter":0 ,
+        "noOfMeter": this.getNoOfMeterForRegion(data[1],reg["Region__c"]) ,
         "regionId":reg["Id"],
         "imagePath": this.getImagePath(reg["Region__c"]),
         "stromPath": "../../assets/tenor.gif",
@@ -56,6 +57,9 @@ export class StatsCardComponent implements OnInit {
         "forecast":reg["Description__c"],
         "temp":reg["CurrentTemp__c"] 
       }));
+  }
+  getNoOfMeterForRegion(meters: any, region: any) {
+    return meters.filter((meter)=>{ return meter["Location__c"] == region});
   }
 
   getImagePath(region: any): any {
