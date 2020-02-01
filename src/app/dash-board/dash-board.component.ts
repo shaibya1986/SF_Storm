@@ -109,6 +109,7 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
   }
   filterMeterData(region: string) {
     this.hasNewMeterData = false;
+    this.defaultSelectedRegion = region;
     if (region) {
       this.bindMeterAgainstSelectedRegion(region)
     }
