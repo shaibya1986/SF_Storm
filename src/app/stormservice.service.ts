@@ -97,6 +97,7 @@ export class StormserviceService {
     https://ap15.salesforce.com/services/data/v42.0/query/?q=SELECT+Id,OwnerId,Name,Status__c,Health__c,Location__c+FROM+Meter__c+WHERE+Location__c='${regionName}'`, { headers: this.requestHeaders})
   }
 
+   
 
   // public getMeterOfSelectedRegion(regionName): Observable<any> {
   //   return this.http.get(`http://127.125.40.160/getMeterStatus/${regionName}`)

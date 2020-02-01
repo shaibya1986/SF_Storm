@@ -6,6 +6,7 @@ import { StatsCardComponent } from '../stats-card/stats-card.component';
 import { StormserviceService } from '../stormservice.service';
 import { timer, from } from 'rxjs'
 import { map, concatMap } from 'rxjs/operators' 
+import { setTimeout } from 'timers';
 
 
 @Component({
@@ -49,6 +50,21 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
     this.toastr.success(`Default selected region is: ${this.defaultSelectedRegion}`, '', {
       timeOut: 1500
     });
+
+  
+  }
+  getRegularMeterUpdateOfSelectedRegion() {
+
+    this.stormService.getMeterOfSelectedRegion(this.defaultSelectedRegion).subscribe((data)=>{
+      this.elements = this.getMeterObjects(data);
+      this.mdbTable.setDataSource(this.elements);
+      this.previous = this.mdbTable.getDataSource();
+      console.log('got new data for ' + this.defaultSelectedRegion);
+      setTimeout(this.getRegularMeterUpdateOfSelectedRegion,5000);
+    });
+
+    
+
   }
 
   private bindMeterAgainstSelectedRegion(regionName) {
@@ -57,6 +73,7 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
       this.elements = this.getMeterObjects(data);
       this.mdbTable.setDataSource(this.elements);
       this.previous = this.mdbTable.getDataSource();
+      this.getRegularMeterUpdateOfSelectedRegion()
     }, (error) => {
       console.log(error.message);
     });
@@ -107,12 +124,9 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
   }
 
   getMessage(message: string) {
+    this.defaultSelectedRegion = message;
     this.filterMeterData(message)
-  }
-
-
-   
-
+  } 
   getIsApproved(IsApproved: boolean) {
     this.isRegionApproved = IsApproved;
   }
