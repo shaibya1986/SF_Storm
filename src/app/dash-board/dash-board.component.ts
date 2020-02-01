@@ -122,7 +122,8 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
   }
 
   getMessage(message: string) {
-    this.defaultSelectedRegion = message;
+    if(message && message!='')
+      this.defaultSelectedRegion = message ;
     this.filterMeterData(message)
   } 
   getIsApproved(IsApproved: boolean) {
