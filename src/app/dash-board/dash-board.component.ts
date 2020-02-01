@@ -4,9 +4,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { StatsCardComponent } from '../stats-card/stats-card.component';
 import { StormserviceService } from '../stormservice.service';
-import { timer, from } from 'rxjs'
-import { map, concatMap } from 'rxjs/operators' 
-import { setTimeout } from 'timers';
 
 
 @Component({
