@@ -58,7 +58,6 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
       this.mdbTable.setDataSource(this.elements);
       this.previous = this.mdbTable.getDataSource();
       console.log('got new data for ' + this.defaultSelectedRegion);
-      setTimeout(()=>{this.getRegularMeterUpdateOfSelectedRegion()},10000);
       this.updateAfterFiveSec = true;
     });
 
@@ -72,7 +71,7 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
       this.elements = this.getMeterObjects(data);
       this.mdbTable.setDataSource(this.elements);
       this.previous = this.mdbTable.getDataSource();
-      this.getRegularMeterUpdateOfSelectedRegion()
+      setInterval(()=>{this.getRegularMeterUpdateOfSelectedRegion()},10000);
     }, (error) => {
       console.log(error.message);
     });
@@ -133,21 +132,6 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
   }
 
   SearchRegion() {
-
-    // fromEvent(this.searchRegiontemp.nativeElement, 'keyup').pipe(
-    //   map((event: any) => {
-    //     return event.target.value;
-    //   })
-    //   ,filter(res => res.length > 2)
-    //   ,debounceTime(1000)        
-    //   ,distinctUntilChanged()
-    //   ).subscribe((text: string) => {
-    //     // this.statCard.filterRegion(this.searchRegion)
-    //     // this.filterMeterData(this.searchRegion);
-    //     this.statCard.filterRegion(text)
-    //     this.filterMeterData(text);
-    //   });
-
     this.statCard.filterRegion(this.searchRegion)
     this.filterMeterData(this.searchRegion);
   }
