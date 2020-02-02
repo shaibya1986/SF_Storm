@@ -22,6 +22,7 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
   headElements = ['meter Id', 'location', 'meter Name', 'health', 'meter On/Off'];
   searchText: string = '';
   searchRegion: string = '';
+  updateAfterFiveSec=false;
   defaultSelectedRegion = "Arkansas";
   @ViewChild(StatsCardComponent, null) statCard: StatsCardComponent;
   @ViewChild('searchRegiontemp', null) searchRegiontemp: ElementRef;
@@ -51,13 +52,14 @@ export class DashBoardComponent implements OnInit, AfterViewInit {
   
   }
   getRegularMeterUpdateOfSelectedRegion() {
-
+    this.updateAfterFiveSec = false;
     this.stormService.getMeterOfSelectedRegion(this.defaultSelectedRegion).subscribe((data)=>{
       this.elements = this.getMeterObjects(data);
       this.mdbTable.setDataSource(this.elements);
       this.previous = this.mdbTable.getDataSource();
       console.log('got new data for ' + this.defaultSelectedRegion);
       setTimeout(()=>{this.getRegularMeterUpdateOfSelectedRegion()},5000);
+      this.updateAfterFiveSec = true;
     });
 
     

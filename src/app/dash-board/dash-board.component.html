@@ -89,7 +89,12 @@
                     <mdb-icon fas icon="sort"></mdb-icon>
                   </th>
                   <th>Action</th>
-                  <i class="fa fa-info-circle" class="information" Title="Meter status get update after each 5 seconds." aria-hidden="true"></i>
+                  <i class="fa fa-info-circle information" *ngIf="!el.updateAfterFiveSec" Title="Meter status get update after each 5 seconds." aria-hidden="true"></i>
+                  <div  *ngIf="el.updateAfterFiveSec">
+                    <div class="spinner-border text-info " role="status">
+                      <span class="sr-only ">Loading...</span>
+                    </div>
+                  </div>
                 </tr>
                 <tr *ngIf="!hasNewMeterData">
                   <th></th> <th></th> <th class="mt-5">
