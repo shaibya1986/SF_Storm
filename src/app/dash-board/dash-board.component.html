@@ -89,11 +89,7 @@
                     <mdb-icon fas icon="sort"></mdb-icon>
                   </th>
                   <th>Action</th>
-                  <i class="fa fa-info-circle information" *ngIf="updateAfterFiveSec" 
-                  mdbTooltip="Meter status get update after every 10 seconds."
-                  placement="top"
-                  mdbWavesEffect
-                  ></i>
+                  <i class="fa fa-info-circle information" *ngIf="updateAfterFiveSec" Title="Meter status get update after every 10 seconds."></i>
                   <div  *ngIf="!updateAfterFiveSec">
                     <div class="spinner-border text-info smallSpiner information" role="status">
                       <span class="sr-only ">Loading...</span>
