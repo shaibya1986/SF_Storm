@@ -12,7 +12,7 @@ export class StormserviceService {
   private cacheRegion$: Observable<IRegion[]>;
   private cacheMeterForRegion$: Observable<IMeter>[] = [];
   private salesforceURL = "https://ap15.salesforce.com/services/data/v42.0/query/?";
-  private piURL = "http://192.168.43.192:81";
+  private piURL = "https://192.168.43.192:81";
 
   constructor(private http: HttpClient) {
     this.requestHeaders = new HttpHeaders().set('Content-Type', 'application/json')
