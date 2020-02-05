@@ -52,7 +52,7 @@ export class StormserviceService {
   }
 
   public setMeterOnOff(position, element): Observable<IMeter> {
-    return this.http.post(`${this.piURL}/api/v1/updateMeter`, {
+    return this.http.post(`/api/v1/updateMeter`, {
       "region": element.location,
       "isMeterOn": position,
       "meterId": element.meterId
